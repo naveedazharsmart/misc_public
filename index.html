@@ -3,12 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>German Word Map</title>
+  <title>German Noun Word Maps by Gender</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
+      margin: 0;
       padding: 20px;
+      background-color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .column {
+      flex: 1 1 30%;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      min-width: 250px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 15px;
     }
 
     .wordmap {
@@ -19,54 +49,68 @@
     }
 
     .word {
-      color: #007BFF;
-      font-size: calc(10px + 0.5vw);
       font-weight: bold;
-      cursor: default;
       user-select: none;
+      cursor: default;
+    }
+
+    .masculine {
+      color: #007BFF;
+    }
+
+    .feminine {
+      color: #E83E8C;
+    }
+
+    .neuter {
+      color: #6C757D;
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align:center; color:#007BFF;">German Word Map</h1>
-  <div class="wordmap">
-    Abend, Absender, Anfang, Angestellte, Anruf, Anrufbeantworter, Apfel, April,
-    Architekt, Arm, Artikel, Arbeitsplatz, Arzt, Aufzug, August, Ausflug,
-    Ausländer, Ausgang, Ausweis, Automat, Bahnhof, Bahnsteig, Balkon, Ball,
-    Basketball, Bauch, Baum, Beamte, Beruf, Bleistift, Blick, Blog, Bogen, Brief,
-    Bruder, Buchstabe, Bus, CD-Player, Chat(room), Chef, Comic, Computer, Dank,
-    Dezember, Dienstag, Doktor, Donnerstag, Drucker, Durst, Ehemann, Eingang,
-    Empfänger, Engländer, Eintritt, Erwachsene, Europäer, Fahrer, Fahrplan,
-    Familienname, Februar, Fehler, Film, Fisch, Flughafen, Fluss, Fotoapparat,
-    Freitag, Freund, Frühling, Fuß, Fußball, Garten, Gast, Geburtsort, Geburtstag,
-    Glückwunsch, Grad (Celsius), Großvater, Gruß, Hals, Hausmann, Herbst, Herd,
-    Herr, Hund, Hunger, Ingenieur, Italiener, Januar, Job, Jugendliche, Juli, Juni,
-    Junge, Kaffee, Kakao, Käse, Kaufmann, Kiosk, Koffer, Kollege, Kopf, Kuchen,
-    Kugelschreiber, Kühlschrank, Kunde, Künstler, Kurs, Laden, Laptop, Lehrer,
-    Link, Lkw, Mai, Mann, Mantel, März, Markt, Marktplatz, Mensch, Mexikaner,
-    Mittag, Mittwoch, Moment, Montag, Morgen, Mund, Nachmittag, Name, Norden,
-    November, Ohrring, Oktober, Onkel, Opa, Ort, Osten, Park, Partner, Pass, Plan,
-    Platz, Preis, Prospekt, Pullover, Quatsch, Radiergummi, Raum, Regen, Reis,
-    Reiseführer, Ring, Rucksack, Saft, Salat, Samstag, Satz, Schalter,
-    Schauspieler, Schinken, Schmerz, Schluss, Schlüssel, Schrank, Schuh, Schüler,
-    See, Sekretär, September, Smartphone, Sohn, Sommer, Sonnabend, Sonntag, Spaß,
-    Spielplatz, Sport, Stock, Strand, Student, Supermarkt, Süden, Tag, Techniker,
-    Tee, Teil, Termin, Test, Text, Tisch, Türke, Unterricht, Urlaub, Vater,
-    Verein, Verkäufer, Vermieter, Verwandte, Vormittag, Vorname, Wald, Wein,
-    Westen, Wind, Winter, Wochentag, Zahn, Zoll, Zug
+  <h1>German Word Maps by Gender</h1>
+  <div class="container">
+    <div class="column">
+      <div class="title masculine">Masculine Nouns</div>
+      <div class="wordmap" id="masculine-map"></div>
+    </div>
+    <div class="column">
+      <div class="title feminine">Feminine Nouns</div>
+      <div class="wordmap" id="feminine-map"></div>
+    </div>
+    <div class="column">
+      <div class="title neuter">Neuter Nouns</div>
+      <div class="wordmap" id="neuter-map"></div>
+    </div>
   </div>
+
   <script>
-    // Turn comma-separated text into styled spans
-    const container = document.querySelector('.wordmap');
-    const words = container.textContent.split(',').map(w => w.trim()).filter(Boolean);
-    container.innerHTML = '';
-    words.forEach(word => {
-      const span = document.createElement('span');
-      span.className = 'word';
-      span.textContent = word;
-      span.style.fontSize = (Math.random() * 1.5 + 1) + 'em';
-      container.appendChild(span);
-    });
+    const masculineWords = [
+      "Abend", "Absender", "Anfang", "Angestellte", "Anruf", "Anrufbeantworter", "Apfel", "April", "Architekt", "Arm", "Artikel", "Arbeitsplatz", "Arzt", "Aufzug", "August", "Ausflug", "Ausländer", "Ausgang", "Ausweis", "Automat", "Bahnhof", "Bahnsteig", "Balkon", "Ball", "Basketball", "Bauch", "Baum", "Beamte", "Beruf", "Bleistift", "Blick", "Blog", "Bogen", "Brief", "Bruder", "Buchstabe", "Bus", "CD-Player", "Chat(room)", "Chef", "Comic", "Computer", "Dank", "Dezember", "Dienstag", "Doktor", "Donnerstag", "Drucker", "Durst", "Ehemann", "Eingang", "Empfänger", "Engländer", "Eintritt", "Erwachsene", "Europäer", "Fahrer", "Fahrplan", "Familienname", "Februar", "Fehler", "Film", "Fisch", "Flughafen", "Fluss", "Fotoapparat", "Freitag", "Freund", "Frühling", "Fuß", "Fußball", "Garten", "Gast", "Geburtsort", "Geburtstag", "Glückwunsch", "Grad (Celsius)", "Großvater", "Gruß", "Hals", "Hausmann", "Herbst", "Herd", "Herr", "Hund", "Hunger", "Ingenieur", "Italiener", "Januar", "Job", "Jugendliche", "Juli", "Juni", "Junge", "Kaffee", "Kakao", "Käse", "Kaufmann", "Kiosk", "Koffer", "Kollege", "Kopf", "Kuchen", "Kugelschreiber", "Kühlschrank", "Kunde", "Künstler", "Kurs", "Laden", "Laptop", "Lehrer", "Link", "Lkw", "Mai", "Mann", "Mantel", "März", "Markt", "Marktplatz", "Mensch", "Mexikaner", "Mittag", "Mittwoch", "Moment", "Montag", "Morgen", "Mund", "Nachmittag", "Name", "Norden", "November", "Ohrring", "Oktober", "Onkel", "Opa", "Ort", "Osten", "Park", "Partner", "Pass", "Plan", "Platz", "Preis", "Prospekt", "Pullover", "Quatsch", "Radiergummi", "Raum", "Regen", "Reis", "Reiseführer", "Ring", "Rucksack", "Saft", "Salat", "Samstag", "Satz", "Schalter", "Schauspieler", "Schinken", "Schmerz", "Schluss", "Schlüssel", "Schrank", "Schuh", "Schüler", "See", "Sekretär", "September", "Smartphone", "Sohn", "Sommer", "Sonnabend", "Sonntag", "Spaß", "Spielplatz", "Sport", "Stock", "Strand", "Student", "Supermarkt", "Süden", "Tag", "Techniker", "Tee", "Teil", "Termin", "Test", "Text", "Tisch", "Türke", "Unterricht", "Urlaub", "Vater", "Verein", "Verkäufer", "Vermieter", "Verwandte", "Vormittag", "Vorname", "Wald", "Wein", "Westen", "Wind", "Winter", "Wochentag", "Zahn", "Zoll", "Zug"
+    ];
+
+    const feminineWords = [
+      "Abfahrt", "Achtung", "Adresse", "Ahnung", "Ankunft", "Anmeldung", "Angestellte", "Angst", "Ansage", "Antwort", "Anzeige", "Apotheke", "Arbeit", "Architektin", "Ärztin", "Aufgabe", "Auskunft", "Autobahn", "Bäckerei", "Bahn", "Band", "Banane", "Bank", "Bibliothek", "Birne", "Bitte", "Blume", "Bluse", "Briefmarke", "Butter", "CD", "Cola", "Dame", "Disco", "Durchsage", "Dusche", "Ecke", "Ehefrau", "Einladung", "Eins", "Eltern", "E-Mail", "Entschuldigung", "Fahrkarte", "Familie", "Farbe", "Ferien", "Firma", "Flasche", "Frage", "Frau", "Freundin", "Freizeit", "Führung", "Geschichte", "Größe", "Großmutter", "Gruppe", "Halbpension", "Halle", "Haltestelle", "Hand", "Hausaufgabe", "Hausfrau", "Heimat", "Hilfe", "Hochzeit", "Homepage", "Idee", "Ingenieurin", "Information", "Insel", "Jacke", "Jeans", "Kamera", "Karte", "Kartoffel", "Kasse", "Katze", "Kauffrau", "Klasse", "Klassenarbeit", "Kleidung", "Küche", "Kundin", "Künstlerin", "Lampe", "Lehrerin", "Leute", "Lösung", "Lust", "Mail", "Mailbox", "Marmelade", "Maschine", "Miete", "Milch", "Milliarde", "Million", "Minute", "Mitte", "Musik", "Mutter", "Nacht", "Nachricht", "Note", "Nummer", "Oma", "Ordnung", "Partnerin", "Party", "Pause", "Pizza", "Polizei", "Pommes frites", "Post", "Postkarte", "Postleitzahl", "Praxis", "Prüfung", "Rechnung", "Reise", "Reparatur", "Rezeption", "S-Bahn", "Sache", "Schauspielerin", "Schokolade", "Schule", "Schülerin", "Schwester", "Sehenswürdigkeit", "Seite", "Sekretärin", "Sekunde", "Speisekarte", "Sprache", "Sprachenschule", "Stadt", "Stelle", "Straße", "Straßenbahn", "Stunde", "Suppe", "Süßigkeiten", "Tasche", "Tasse", "Tante", "Technikerin", "Tochter", "Toilette", "Tomate", "Treppe", "Tür", "U-Bahn", "Uhr", "Unterschrift", "Vorsicht", "Vorwahl", "Welt", "Woche", "Wohnung", "Wurst", "Zeit", "Zeitung", "Zigarette"
+    ];
+
+    const neuterWords = [
+      "Alter", "Apartment", "Auge", "Ausland", "Auto", "Baby", "Bad", "Bein", "Beispiel", "Bett", "Bier", "Bild", "Brot", "Brötchen", "Buch", "Café", "Cola", "Comic", "Datum", "Doppelzimmer", "Dorf", "Ei", "Eis", "Einzelzimmer", "Ende", "Ergebnis", "Essen", "Fach", "Fahrrad", "Fax", "Fenster", "Fernsehen", "Feuer", "Fieber", "Fleisch", "Flugzeug", "Formular", "Foto", "Frühjahr", "Frühstück", "Geburtsjahr", "Geld", "Gemüse", "Gepäck", "Geschäft", "Geschenk", "Gespräch", "Getränk", "Gewicht", "Glas", "Gleis", "Glück", "Goethe-Institut", "Gymnasium", "Haar", "Hähnchen", "Handy", "Haus", "Heft", "Hobby", "Hotel", "Internet", "Jahr", "Kind", "Kindergarten", "Kino", "Klavier", "Kleid", "Konto", "Krankenhaus", "Land", "Leben", "Licht", "Lied", "Lokal", "Mädchen", "Mal", "Meer", "Mineralwasser", "Obst", "Öl", "Paket", "Papier", "Pferd", "Poster", "Praktikum", "Problem", "Quiz", "Rad", "Radio", "Rätsel", "Reisebüro", "Restaurant", "Salz", "Schild", "Schiff", "Schwimmbad", "Smartphone", "Sofa", "Spiel", "Studium", "Stück", "Taschengeld", "Taxi", "Telefon", "Test", "Text", "Theater", "Thema", "Ticket", "Tier", "T-Shirt", "Wasser", "Wetter", "Wiederhören", "Wiedersehen", "Wochenende", "Wohnzimmer", "Wort", "Wörterbuch", "Zimmer"
+    ];
+
+    function renderWords(words, containerId, className) {
+      const container = document.getElementById(containerId);
+      words.forEach(word => {
+        const span = document.createElement('span');
+        span.className = `word ${className}`;
+        span.textContent = word;
+        span.style.fontSize = (Math.random() * 1.2 + 0.8) + 'em';
+        container.appendChild(span);
+      });
+    }
+
+    renderWords(masculineWords, 'masculine-map', 'masculine');
+    renderWords(feminineWords, 'feminine-map', 'feminine');
+    renderWords(neuterWords, 'neuter-map', 'neuter');
   </script>
 </body>
 </html>
