@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>German Word Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 20px;
+    }
+
+    .wordmap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .word {
+      color: #007BFF;
+      font-size: calc(10px + 0.5vw);
+      font-weight: bold;
+      cursor: default;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center; color:#007BFF;">German Word Map</h1>
+  <div class="wordmap">
+    Abend, Absender, Anfang, Angestellte, Anruf, Anrufbeantworter, Apfel, April,
+    Architekt, Arm, Artikel, Arbeitsplatz, Arzt, Aufzug, August, Ausflug,
+    Ausländer, Ausgang, Ausweis, Automat, Bahnhof, Bahnsteig, Balkon, Ball,
+    Basketball, Bauch, Baum, Beamte, Beruf, Bleistift, Blick, Blog, Bogen, Brief,
+    Bruder, Buchstabe, Bus, CD-Player, Chat(room), Chef, Comic, Computer, Dank,
+    Dezember, Dienstag, Doktor, Donnerstag, Drucker, Durst, Ehemann, Eingang,
+    Empfänger, Engländer, Eintritt, Erwachsene, Europäer, Fahrer, Fahrplan,
+    Familienname, Februar, Fehler, Film, Fisch, Flughafen, Fluss, Fotoapparat,
+    Freitag, Freund, Frühling, Fuß, Fußball, Garten, Gast, Geburtsort, Geburtstag,
+    Glückwunsch, Grad (Celsius), Großvater, Gruß, Hals, Hausmann, Herbst, Herd,
+    Herr, Hund, Hunger, Ingenieur, Italiener, Januar, Job, Jugendliche, Juli, Juni,
+    Junge, Kaffee, Kakao, Käse, Kaufmann, Kiosk, Koffer, Kollege, Kopf, Kuchen,
+    Kugelschreiber, Kühlschrank, Kunde, Künstler, Kurs, Laden, Laptop, Lehrer,
+    Link, Lkw, Mai, Mann, Mantel, März, Markt, Marktplatz, Mensch, Mexikaner,
+    Mittag, Mittwoch, Moment, Montag, Morgen, Mund, Nachmittag, Name, Norden,
+    November, Ohrring, Oktober, Onkel, Opa, Ort, Osten, Park, Partner, Pass, Plan,
+    Platz, Preis, Prospekt, Pullover, Quatsch, Radiergummi, Raum, Regen, Reis,
+    Reiseführer, Ring, Rucksack, Saft, Salat, Samstag, Satz, Schalter,
+    Schauspieler, Schinken, Schmerz, Schluss, Schlüssel, Schrank, Schuh, Schüler,
+    See, Sekretär, September, Smartphone, Sohn, Sommer, Sonnabend, Sonntag, Spaß,
+    Spielplatz, Sport, Stock, Strand, Student, Supermarkt, Süden, Tag, Techniker,
+    Tee, Teil, Termin, Test, Text, Tisch, Türke, Unterricht, Urlaub, Vater,
+    Verein, Verkäufer, Vermieter, Verwandte, Vormittag, Vorname, Wald, Wein,
+    Westen, Wind, Winter, Wochentag, Zahn, Zoll, Zug
+  </div>
+  <script>
+    // Turn comma-separated text into styled spans
+    const container = document.querySelector('.wordmap');
+    const words = container.textContent.split(',').map(w => w.trim()).filter(Boolean);
+    container.innerHTML = '';
+    words.forEach(word => {
+      const span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = word;
+      span.style.fontSize = (Math.random() * 1.5 + 1) + 'em';
+      container.appendChild(span);
+    });
+  </script>
+</body>
+</html>
